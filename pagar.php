@@ -42,11 +42,13 @@ if($_POST){
 <div class="jumbotron text-center">
     <h1 class="display-4">¡Paso Final!</h1>
     <hr class="my-4">
-    <p class="lead">Estas a punto de pagar con PayPal la cantidad de:
+    <p class="lead">Estas a punto de pagar con MercadoPago la cantidad de:
         <h4>$<?php echo number_format($total,2); ?></h4>
-        
+        <?php include 'mercado_pago.php'; ?>
     </p>
         <p>Los datos de envío seran solicitados despues de procesar el pago
-        </p>
+    </p>
 </div>
+<div class="checkout-btn"></div>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 <?php include 'templates/pie.php'; ?>

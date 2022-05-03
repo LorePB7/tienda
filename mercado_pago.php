@@ -1,19 +1,23 @@
 <?php
-  require "vendor/autoload.php";
-  MercadoPago\SDK::setAccessToken("TEST-8221914580112236-042519-c2e2c4462e8a9d4bb2171aa8533e1bb7-292116879");
+  require __DIR__.'/vendor/autoload.php';
+  $accessToken="TEST-1627583639589383-050222-b50ca23e510f4b5e7c38b655bdb39d44-292116879";
+  MercadoPago\SDK::setAccessToken($accessToken);
   $preference = new MercadoPago\Preference();
 
+  $preference->back_urls= array(
+    "success"=>"http://localhost/tienda/correcto.php",
+    "failure"=>"http://localhost/tienda/falla.php",
+    "pending"=>"http://localhost/tienda/falla.php"
+  );
+
+  $productos=[];
   $item = new MercadoPago\Item();
-  $item->title = "Blue shirt";
-  $item->quantity = 10;
-  $item->currency_id = "ARS";
-  $item->unit_price = 150;
+  $item->title = "Camiseta";
+  $item->quantity = 1;
+  $item->unit_price = 5000;
+  array_push($productos,$item);
 
-  $payer = new MercadoPago\Payer();
-  $payer->email = "test_user_19653727@testuser.com";
-
-  $preference->items = array($item);
-  $preference->payer = $payer;
+  $preference->items = $productos;
   $preference->save();
 ?>
 
@@ -25,19 +29,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 <body>
-    <h3>Mercado Pago</h3>
-
     <div class="checkout-btn"></div>
-
-    
-
+	<script src="https://sdk.mercadopago.com/js/v2"></script>
     <script>
 			//Adicione as credenciais de sua conta Mercado Pago junto ao SDK
-			const mp = new MercadoPago('TEST-d12b8954-eb42-49a5-a133-2c6f2b73c5b6', {
+            var public_key= "TEST-09193cf9-4a6e-44fc-8f21-316b6612df51";
+			const mp = new MercadoPago(public_key, {
 			    locale: 'es-AR'
 			});
 			const checkout = mp.checkout({
@@ -50,6 +49,5 @@
 			    }
 			});
 	</script>
-
 </body>
 </html>
