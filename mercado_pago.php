@@ -12,9 +12,9 @@
 
   $productos=[];
   $item = new MercadoPago\Item();
-  $item->title = "Camiseta";
-  $item->quantity = 1;
-  $item->unit_price = 5000;
+  $item->title = $producto['NOMBRE'];
+  $item->quantity = $producto['CANTIDAD'];
+  $item->unit_price = $total;
   array_push($productos,$item);
 
   $preference->items = $productos;
