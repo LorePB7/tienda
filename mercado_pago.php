@@ -10,10 +10,13 @@
     "pending"=>"http://localhost/tienda/falla.php"
   );
 
+  $preference->auto_return = "approved";
+  $preference->binary_mode = true;
+
   $productos=[];
   $item = new MercadoPago\Item();
   $item->title = $producto['NOMBRE'];
-  $item->quantity = $producto['CANTIDAD'];
+  $item->quantity = 1;
   $item->unit_price = $total;
   array_push($productos,$item);
 
